@@ -1,0 +1,17 @@
+<form #form="ngForm">
+   <input type="text" #tr [(ngModel)]="product.category" name="test" id="">
+  
+    <button type="submit">Submit</button>
+  </form>
+  <p>{{temp}}</p>
+  <p>{{test.name}}</p>
+  {{form.value | json}}
+  {{tr.classList}}
+
+  <div *ngIf="products$ | async as products">
+    <ul>
+      <li *ngFor="let product of products">
+        {{product | json}}
+      </li>
+    </ul>
+  </div>
