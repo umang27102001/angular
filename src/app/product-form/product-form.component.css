@@ -46,5 +46,6 @@ body {
   }
 
   .error-field{
-    border: 1px solid red;
+    color: white;
+    background-color: red;
   }

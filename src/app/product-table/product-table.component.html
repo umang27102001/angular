@@ -1,0 +1,34 @@
+<h1>Products</h1>
+
+<div *ngIf="product$ | async as products">
+    <div *ngIf="products.length>0; else noProduct">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Discount</th>
+                    <th>ImageUrl</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.discount}}</td>
+                    <td>{{product.imageUrl}}</td>
+                    <td><button (click)="delete(product.id)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #noProduct>
+        <h6>No products exist</h6>
+    </ng-template>
+</div>

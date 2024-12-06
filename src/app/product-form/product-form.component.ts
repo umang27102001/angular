@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { IProduct } from '../data/Product';
 import { DataService } from '../data.service';
 import { catchError, EMPTY, map, Observable, of, Subscription, tap } from 'rxjs';
+import { error } from 'console';
 
 @Component({
   selector: 'app-product-form',
@@ -12,47 +13,32 @@ import { catchError, EMPTY, map, Observable, of, Subscription, tap } from 'rxjs'
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css'
 })
-export class ProductFormComponent implements OnInit, OnChanges{
+export class ProductFormComponent implements OnInit{
   originalProduct: IProduct = {
-    id:0,
-    name:'',
-    category:'',
-    description:'',
-    price:0,
-    imageUrl:'',
-    discount: 0
+    id:11,
+    name:'Boult headset',
+    category:'Headphones',
+    description:'Great bluetooth',
+    price:123,
+    imageUrl:'http://bluetooh-headset.fav',
+    discount: 123
   } 
   @Input() temp: string = '';
   @Input() test = {name:'umang'}
   products$!: Observable<IProduct[]>
   product : IProduct = {... this.originalProduct}
-  sub!: Subscription;
   errMessage: string = '';
   constructor(private dataService: DataService){
 
   }
-  ngOnChanges(){
-    console.log("Hi")
-  }
   ngOnInit(): void {
-    let a=[1,2,3,4,5]
     this.products$ = this.dataService.getProducts();
-    console.log(this.products$);
-    of(...a).pipe(
-      map(e=>{
-        if(e==9){
-          throw '3';
-        }
-        return e*2;
-      }),
-      tap(e=>console.log(e)),
-      catchError(err=>EMPTY)
-    );
-   
-    console.log(a)
   }
   submit(form: NgForm){
-    console.log(form)
-    this.test = {...this.test, name:"oppo"}
+    console.log(this.product);
+    this.dataService.postFormData(this.product).subscribe({
+      next: data=>console.log(data), 
+      error: err=>console.log(err)
+    });
   }
 }

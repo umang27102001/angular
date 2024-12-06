@@ -7,24 +7,29 @@ import { catchError, Observable, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  Url : string ='';
+  baseUrl : string ='http://localhost:5240/';
   constructor(private httpclient: HttpClient) { }
 
-  postFormData(data: IProduct): Observable<any>{
-    return of(1,2,3)
+  postFormData(data: IProduct): Observable<Object>{
+    const Url = this.baseUrl+"set-product";
+    console.log("sending product!")
+    return this.httpclient.post(Url,data).pipe(catchError(e => {
+      console.log(e);
+      throw e;
+    }));
   }
   getProducts(): Observable<IProduct[]>{
-    // return this.httpclient.get<IProduct[]>(this.Url).pipe(
-    //   tap(e => console.log("data received ", e)),
-    // )
-    return of([{
-      id: 0,
-    name: "string",
-    price: 0,
-    description:"string",
-    category:"string",
-    imageUrl:"string",
-    discount: 9
-    }]);
+    const Url = this.baseUrl+"get-products"
+    return this.httpclient.get<IProduct[]>(Url).pipe(catchError(e => {
+      console.log(e);
+      throw e;
+    }));
+  }
+  deleteProduct(id: number): Observable<Object>{
+    const Url = this.baseUrl+"delete-product/"+id;
+    return this.httpclient.delete(Url).pipe(catchError(err=>{
+      console.log(err);
+      throw err;
+    }));
   }
 }

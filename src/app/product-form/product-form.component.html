@@ -1,17 +1,48 @@
-<form #form="ngForm">
-   <input type="text" #tr [(ngModel)]="product.category" name="test" id="">
-  
-    <button type="submit">Submit</button>
-  </form>
-  <p>{{temp}}</p>
-  <p>{{test.name}}</p>
-  {{form.value | json}}
-  {{tr.classList}}
-
-  <div *ngIf="products$ | async as products">
-    <ul>
-      <li *ngFor="let product of products">
-        {{product | json}}
-      </li>
-    </ul>
+<form #form="ngForm" (ngSubmit)="submit(form)">
+  <!-- Product ID -->
+  <div>
+    <label for="id">Product ID:</label>
+    <input #id="ngModel" required [(ngModel)]="product.id" id="id" type="text" name="id" required />
+    <div *ngIf="form.submitted && !id.valid" [class.error-field]="true">Please enter a valid Id</div>
   </div>
+
+  <!-- Product Name -->
+  <div>
+    <label for="name">Name:</label>
+    <input #name="ngModel" required [(ngModel)]="product.name"  id="name" type="text" name="name" />
+    <div *ngIf="form.submitted && !name.valid" [class.error-field]="true">Please enter a valid name</div>
+  </div>
+
+  <!-- Product Price -->
+  <div>
+    <label for="price">Price:</label>
+    <input id="price" type="number" [(ngModel)]="product.price" name="price" min="0" />
+  </div>
+
+  <!-- Product Description -->
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" [(ngModel)]="product.description" name="description"></textarea>
+  </div>
+
+  <!-- Product Category -->
+  <div>
+    <label for="category">Category:</label>
+    <input id="category" type="text" [(ngModel)]="product.category" name="category" />
+  </div>
+
+  <!-- Image URL -->
+  <div>
+    <label for="imageUrl">Image URL:</label>
+    <input id="imageUrl" type="url" [(ngModel)]="product.imageUrl" name="imageUrl" />
+  </div>
+
+  <!-- Discount -->
+  <div>
+    <label for="discount">Discount (%):</label>
+    <input id="discount" type="number" [(ngModel)]="product.discount" name="discount" min="0" max="100" />
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit">Submit</button>
+</form>
