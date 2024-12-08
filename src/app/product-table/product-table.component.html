@@ -1,6 +1,6 @@
 <h1>Products</h1>
 
-<div *ngIf="product$ | async as products">
+<div *ngIf="productWithCat$ | async as products">
     <div *ngIf="products.length>0; else noProduct">
         <table>
             <thead>
@@ -19,7 +19,7 @@
                     <td>{{product.name}}</td>
                     <td>{{product.price}}</td>
                     <td>{{product.description}}</td>
-                    <td>{{product.category}}</td>
+                    <td>{{product.categoryName}}</td>
                     <td>{{product.discount}}</td>
                     <td>{{product.imageUrl}}</td>
                     <td><button (click)="delete(product.id)">Delete</button></td>
@@ -32,3 +32,4 @@
         <h6>No products exist</h6>
     </ng-template>
 </div>
+<div *ngIf="errorMessage.length>0">Backend error: {{errorMessage}}</div>

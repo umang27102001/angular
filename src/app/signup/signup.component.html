@@ -1,0 +1,27 @@
+<form #form="ngForm" (ngSubmit)="addUser(form)">
+    <div>
+        <label for="name">
+            User Name: <input required type="text" name="username" #name="ngModel" [(ngModel)]="user.name">
+        </label>
+        <div *ngIf="form.submitted && !name.valid" [class.error-field]="true">Please enter a valid User Name</div>
+    </div>
+    <div>
+        <label for="email">
+            Email: <input required type="email" name="email" #email="ngModel" [(ngModel)]="user.email">
+        </label>
+        <div *ngIf="form.submitted && !email.valid" [class.error-field]="true">Please enter a valid Email</div>
+    </div>
+    <div>
+        <label for="password">
+            Password: <input required type="email" name="password" #password="ngModel" [(ngModel)]="user.password">
+        </label>
+        <div *ngIf="form.submitted && !password.valid" [class.error-field]="true">Please enter a password</div>
+    </div>
+    <div>
+        <label for="password">
+            Re-enter Password: <input type="email" name="password2" #password2="ngModel" ngModel>
+        </label>
+        <div *ngIf="form.submitted && (!password2.valid || password2.value != password.value)" [class.error-field]="true">Password did not match</div>
+    </div>
+    <button type="submit">Sign-up</button>
+</form>
