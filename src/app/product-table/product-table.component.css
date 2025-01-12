@@ -1,0 +1,99 @@
+/* General Styles */
+.products-title {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 36px;
+    margin-top: 20px;
+}
+
+.category-container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.category-label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.category-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+    margin: 20px;
+}
+
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.products-table th {
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.products-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.products-table img.product-image {
+    max-width: 50px;
+    border-radius: 5px;
+}
+
+/* Button Styles */
+.delete-button {
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+/* No Product Message */
+.no-product-message {
+    text-align: center;
+    color: #555;
+    font-size: 18px;
+    margin: 20px;
+}
+
+/* Error Message */
+.error-message {
+    color: #f44336;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
+}
+.add-button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.add-button:hover {
+    background-color: #4CAF50;
+}

@@ -6,11 +6,12 @@ import { ProductService } from '../product.service';
 import { catchError, EMPTY, map, Observable, of} from 'rxjs';
 import { ICategory } from '../Models/Category';
 import { CategoryService } from '../category.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css'
 })
@@ -23,7 +24,8 @@ export class ProductFormComponent implements OnInit{
     description:'Great bluetooth',
     price:123,
     imageUrl:'http://bluetooh-headset.fav',
-    discount: 123
+    productCode:'223',
+    discount: 123,
   }
   category$: Observable<ICategory[]> | undefined
   product : IProduct = {... this.originalProduct}
@@ -32,14 +34,14 @@ export class ProductFormComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.category$ = this.categoryService.getCategories().pipe(
+    this.category$ = this.categoryService.categories$.pipe(
       catchError(error => EMPTY)
     );
   }
   submit(form: NgForm){
     console.log(this.product);
     this.productService.addProducts(this.product).subscribe({
-      next: data=>console.log(data), 
+      next: data=>console.log(data),
       error: err=>console.log(err)
     });
   }

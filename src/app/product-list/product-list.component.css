@@ -1,0 +1,130 @@
+/* General styling for the page */
+.category-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Styling for the product list */
+.product-list {
+    flex: 1;  /* Allow the product list to take available space */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.product-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px; /* Space between the buttons */
+    margin-bottom: 20px;
+}
+
+.nav-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 18px; /* Adjust padding for better button size */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    width: 50px;  /* Set a consistent width for buttons */
+    height: 50px; /* Set a consistent height for buttons */
+}
+
+.nav-button:hover {
+    background-color: #0056b3;
+}
+
+.product-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-name {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Styling for the product details section */
+app-product-details {
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .category-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    app-product-details {
+        width: 90%;  /* Ensure details section is not too wide on small screens */
+    }
+}
+
+.disabledButton{
+    background-color: #007bff86;
+
+  }
+  .disabledButton:hover{
+    background-color: #007bff86;
+    cursor:help;
+  }
+  .active{
+    background-color: #007bff86;
+    color: white;
+}
+
+.error{
+  color: red;
+  font-weight: bold;
+}
+.submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 12px; /* Reduced padding */
+  font-size: 14px; /* Reduced font size */
+  font-weight: bold;
+  border-radius: 6px; /* Slightly reduced radius */
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(76, 174, 76, 0.4);
+}
+
+.submit-btn:focus {
+  outline: none;
+  background-color: #0056b3;
+  box-shadow: 0 0 6px rgba(76, 174, 76, 0.6);
+}

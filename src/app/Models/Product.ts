@@ -5,6 +5,7 @@ export interface IProduct{
     description?:string,
     categoryId: number,
     categoryName: string,
+    productCode:string,
     imageUrl:string,
     discount: number
 }

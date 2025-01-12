@@ -1,0 +1,50 @@
+<div *ngIf="product" class="product-card">
+<form #form="ngForm" (ngSubmit)="(form)" class="product-form">
+  <!-- Product Name -->
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input #name="ngModel" required [(ngModel)]="product.name" id="name" type="text" name="name" />
+    <div *ngIf="form.submitted && !name.valid" class="error">Please enter a valid name</div>
+  </div>
+
+  <!-- Product Price -->
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input id="price" type="number" [(ngModel)]="product.price" name="price" min="0" />
+  </div>
+
+  <!-- Product Description -->
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" [(ngModel)]="product.description" name="description"></textarea>
+  </div>
+
+  <!-- Product Category -->
+  <div class="form-group" *ngIf="categories$ | async as categories">
+    <label for="category">Category:</label>
+    <select name="category" [(ngModel)]="product.categoryId" class="custom-select">
+      <option value="null" disabled selected>Select a category</option>
+      <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+  </div>
+
+  <!-- Image URL -->
+  <div class="form-group">
+    <label for="imageUrl">Image URL:</label>
+    <input id="imageUrl" type="url" [(ngModel)]="product.imageUrl" name="imageUrl" />
+  </div>
+
+  <!-- Discount -->
+  <div class="form-group">
+    <label for="discount">Discount (%):</label>
+    <input id="discount" type="number" [(ngModel)]="product.discount" name="discount" min="0" max="100" />
+  </div>
+
+  <!-- Submit Button -->
+  <div style="display: flex; gap: 10px;">
+    <button type="submit" style="width: 6rem;" class="submit-btn" (click)='saveProduct()'>Save</button>
+    <button type="submit" style="width: 6rem;" class="cancel-btn" (click)='deleteProduct()'>Delete</button>
+  </div>
+</form>
+</div>
+

@@ -15,7 +15,6 @@ export class UserService {
     addUser(user: IUser): Observable<Object>{
       const Url = this.baseUrl+'add'
       return this.httpclient.post(Url, user).pipe(catchError(e=>{
-        console.log(e);
         throw e;
     }));
     }
@@ -23,7 +22,6 @@ export class UserService {
     loginUser(user: IUser): Observable<Object>{
       const Url = this.baseUrl+'login';
       return this.httpclient.post(Url, user).pipe(catchError(e =>{
-        console.log(e);
         throw e;
       }))
     }

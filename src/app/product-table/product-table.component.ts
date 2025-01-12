@@ -1,46 +1,52 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProductService } from '../product.service';
-import { catchError, combineLatest, EMPTY, forkJoin, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, map, Observable } from 'rxjs';
 import { IProduct } from '../Models/Product';
 import { CommonModule } from '@angular/common';
 import { ICategory } from '../Models/Category';
 import { CategoryService } from '../category.service';
+import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 @Component({
   selector: 'app-product-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-table.component.html',
   styleUrl: './product-table.component.css',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductTableComponent implements OnInit{
+export class ProductTableComponent{
   errorMessage: string = '';
-  constructor(private productService: ProductService, private categoryService: CategoryService){
+  private productService: ProductService = inject(ProductService);
+  private categoryService: CategoryService = inject(CategoryService)
+  private categorySelectedSubject = new BehaviorSubject<number>(0);
+  categorySelectedAction = this.categorySelectedSubject.asObservable();
+  category$:Observable<ICategory[]> = this.categoryService.categories$.pipe(catchError(e =>{
+    console.log(this.errorMessage);
+    return EMPTY;
+  }))
 
-  }
-  product$: Observable<IProduct[]>  | undefined
-  category$:Observable<ICategory[]> |undefined
-  productWithCat$: Observable<IProduct[]> | undefined;
-  ngOnInit(): void{
-    this.product$=this.productService.getProducts().pipe(catchError(e =>{
-      this.errorMessage = e;
-      console.log(this.errorMessage);
+  filteredProducts$: Observable<IProduct[]> = combineLatest([this.productService.productWithCategory$, this. categorySelectedAction]).pipe(
+    map(data=> data[0].filter(e=> data[1] === 0 ? true : e.categoryId == data[1])),
+    catchError(err => {
+      this.errorMessage=err;
       return EMPTY;
-    }));
-    this.category$ = this.categoryService.getCategories().pipe(catchError(e =>{
-      console.log(this.errorMessage);
-      return EMPTY;
-    }))
-    this.productWithCat$ = combineLatest([this.product$, this.category$]).pipe(
-      map(([product, category]) => product.map(pd =>({...pd, categoryName: category.find(cat => cat.id == pd.categoryId)?.name} as IProduct)))
-    )
-  }
+    })
+  );
+
   delete(id: number){
     console.log("deleting "+id)
     this.productService.deleteProduct(id).subscribe({
       next: data=> console.log(data),
       error: err=> console.log(err),
   });
+  }
+  onSelectedCatId(id: string){
+    this.categorySelectedSubject.next(+id);
+  }
+  addProduct(){
+    this.errorMessage="Kaam khatam";
+    // this.productService.addProduct();
   }
 }

@@ -3,6 +3,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductTableComponent } from './product-table/product-table.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 export const routes: Routes = [
     {
@@ -19,5 +20,8 @@ export const routes: Routes = [
     },
     {
         path:'login', component: LoginComponent
+    },
+    {
+        path:'product-list', component: ProductListComponent
     }
 ];

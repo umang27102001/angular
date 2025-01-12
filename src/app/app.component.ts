@@ -7,13 +7,13 @@ import { ProductFormComponent } from './product-form/product-form.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, ProductFormComponent, FormsModule],
+  imports: [RouterOutlet, CommonModule, ProductFormComponent, FormsModule,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent{
   title = 'ps-demo';
   Submit(){
-    
+
   }
 }

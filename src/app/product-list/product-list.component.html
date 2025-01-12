@@ -1,0 +1,22 @@
+<p class="info-text">product-list works!</p>
+<h1 class="products-title">Products</h1>
+
+<div>
+  <div class="category-container" *ngIf="products$ | async as products">
+    <div class="product-list">
+        <div class="product-navigation">
+            <button [disabled]="pageIndex===1" [class.disabledButton]="pageIndex===1" class="nav-button" (click)="prevPage()">&lt;</button>
+            <button [disabled]="isLastPage" [class.disabledButton]="isLastPage" class="nav-button" (click)="nextPage()">&gt;</button>
+            <input type="checkbox" (change)="checkproductcode()" [checked]="showProductCode">
+        </div>
+        <div (click)="selectProduct(product)" [ngClass]="{active: product.id === selectedProductId}" *ngFor="let product of products" class="product-card">
+            <div class="product-name">{{ product.name }} <span *ngIf="showProductCode">({{product.productCode}})</span></div>
+        </div>
+        <div class="category-container">
+          <button class="submit-btn" (click)="addProduct()">Add Product</button>
+        </div>
+    </div>
+    <app-product-details style="width: 65%;"></app-product-details>
+</div>
+</div>
+<div *ngIf="errorMessage | async as error" class="error">Error occured. Message: {{error}}</div>
